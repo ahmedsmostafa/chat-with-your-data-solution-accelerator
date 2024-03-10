@@ -64,16 +64,16 @@ param azureSearchTitleColumn string = 'title'
 param azureSearchUrlColumn string = 'url'
 
 @description('Name of Azure OpenAI Resource')
-param azureOpenAIResourceName string = '${environmentName}-openai-${resourceToken}'
+param azureOpenAIResourceName string = 'ahmostaopeneastus'
 
 @description('Name of Azure OpenAI Resource SKU')
 param azureOpenAISkuName string = 'S0'
 
 @description('Azure OpenAI Model Deployment Name')
-param azureOpenAIModel string = 'gpt-35-turbo'
+param azureOpenAIModel string = 'gpt-35-turbo-16k'
 
 @description('Azure OpenAI Model Name')
-param azureOpenAIModelName string = 'gpt-35-turbo'
+param azureOpenAIModelName string = 'gpt-35-turbo-16k'
 
 param azureOpenAIModelVersion string = '0613'
 
@@ -214,7 +214,7 @@ module functionaccess './core/security/keyvault-access.bicep' = if (useKeyVault)
 
 module openai 'core/ai/cognitiveservices.bicep' = {
   name: azureOpenAIResourceName
-  scope: rg
+  scope: resourceGroup('analytics')
   params: {
     name: azureOpenAIResourceName
     location: location
